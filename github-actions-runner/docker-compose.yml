@@ -1,0 +1,36 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  github-actions-runner-1:
+    build:
+      context: ./
+      args:
+        - RUNNER_DOWNLOAD_URL=https://github.com/actions/runner/releases/download/v2.304.0/actions-runner-linux-x64-2.304.0.tar.gz
+        - RUNNER_FILE=actions-runner-linux-x64-2.304.0.tar.gz
+        - RUNNER_USER=github
+        # - DOCKER_GID=999
+    image: github-actions-runner
+    container_name: github-actions-runner-1
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - github-actions-runner-1-data:/actions-runner
+      # - /var/run/docker.sock:/var/run/docker.sock
+  github-actions-runner-2:
+    depends_on:
+      - github-actions-runner-1
+    image: github-actions-runner
+    container_name: github-actions-runner-2
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - github-actions-runner-2-data:/actions-runner
+      # - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  github-actions-runner-1-data:
+    name: github_actions_runner_1_data
+  github-actions-runner-2-data:
+    name: github_actions_runner_2_data
