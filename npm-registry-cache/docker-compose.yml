@@ -1,0 +1,24 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  verdaccio:
+    image: verdaccio/verdaccio:latest
+    container_name: verdaccio
+    hostname: verdaccio
+    restart: always
+    ports:
+      - 4873:4873
+    volumes:
+      - verdaccio_conf:/verdaccio/conf
+      - verdaccio_storage:/verdaccio/storage
+      - verdaccio_plugins:/verdaccio/plugins
+    environment:
+      - VERDACCIO_PORT=4873
+volumes:
+  verdaccio_conf:
+    name: verdaccio_conf
+  verdaccio_storage:
+    name: verdaccio_storage
+  verdaccio_plugins:
+    name: verdaccio_plugins

@@ -1,0 +1,25 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  gitlab:
+    image: gitlab/gitlab-ee:latest
+    container_name: gitlab
+    hostname: gitlab
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url "http://10.0.0.1:80/"
+volumes:
+  gitlab_config:
+    name: gitlab_config
+  gitlab_logs:
+    name: gitlab_logs
+  gitlab_data:
+    name: gitlab_data

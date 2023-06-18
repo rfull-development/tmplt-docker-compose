@@ -1,0 +1,14 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  docker:
+    image: docker:dind
+    container_name: docker
+    restart: always
+    volumes:
+      - docker-lib:/var/lib/docker
+    privileged: true
+volumes:
+  docker-lib:
+    name: docker_lib

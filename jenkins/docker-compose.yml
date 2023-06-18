@@ -1,0 +1,18 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    hostname: jenkins
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - jenkins_home:/var/jenkins_home
+  ssh-agent:
+    image: jenkins/ssh-agent:latest
+volumes:
+  jenkins_home:
+    name: jenkins_home
