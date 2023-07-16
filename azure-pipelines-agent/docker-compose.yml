@@ -1,0 +1,24 @@
+# Copyright (c) 2023 RFull Development
+# This source code is managed under the MIT license. See LICENSE in the project root.
+version: "3.9"
+services:
+  azure-pipelines-agent:
+    build:
+      context: ./
+      args:
+        - AGENT_DOWNLOAD_URL=https://vstsagentpackage.azureedge.net/agent/3.220.5/vsts-agent-linux-x64-3.220.5.tar.gz
+        - AGENT_FILE=vsts-agent-linux-x64-3.220.5.tar.gz
+        - AGENT_USER=azure
+        - DOCKER_GID=0
+    image: azure-pipelines-agent
+    container_name: azure-pipelines-agent
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - azure-pipelines-agent-data:/home/azure
+      - /var/run/docker.sock:/var/run/docker.sock
+volumes:
+  azure-pipelines-agent-data:
+    name: azure_pipelines_agent
+
