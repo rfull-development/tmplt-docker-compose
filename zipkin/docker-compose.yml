@@ -2,7 +2,7 @@
 # This source code is managed under the MIT license. See LICENSE in the project root.
 version: "3.9"
 services:
-  swagger-editor:
+  zipkin:
     image: openzipkin/zipkin:latest
     container_name: zipkin
     hostname: zipkin
